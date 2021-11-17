@@ -1,0 +1,27 @@
+{
+    "name": "dr-peter/lock-user",
+    "description": "Lock authenticated user after set idle time",
+    "authors": [
+        {
+            "name": "Peter de Rooij",
+            "email": "de.rooij.peter@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "DrPeter\\LockUser\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "laravel/ui": "^3.3"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DrPeter\\UserLock\\UserLockProvider"
+            ]
+        }
+    }
+}
