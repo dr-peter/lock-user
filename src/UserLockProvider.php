@@ -106,6 +106,6 @@ class UserLockProvider extends ServiceProvider
      */
     private function registerViews()
     {
-        $this->loadViewsFrom(__DIR__ . '/views', 'userlock');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'userlock');
     }
 }
