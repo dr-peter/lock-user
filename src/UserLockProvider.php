@@ -2,7 +2,6 @@
 
 namespace DrPeter\LockUser;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,10 +14,8 @@ class UserLockProvider extends ServiceProvider
      */
     public function register()
     {
-        // Add controller
-        $this->app->make('DrPeter\LockUser\LockUserController');
-        // Load views
-        $this->loadViewsFrom(__DIR__ . '/views', 'userlock');
+        $this->registerControllers();
+        $this->registerViews();
     }
 
     /**
@@ -28,14 +25,40 @@ class UserLockProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Add routes
-        include(__DIR__ . '/routes.php');
+        $this->includeRoutes();
+        $this->publishFiles();
+        $this->addBladeDirectives();
+    }
 
-        // Set publish files
+    /**
+     * Publish all files
+     * 
+     * @return void
+     */
+    private function publishFiles()
+    {
         $this->publishes([
             __DIR__ . '/views/lockscreen.blade.php' =>  resource_path('views/vendor/dr-peter/lock-user/lockscreen.blade.php'),
         ], 'lock-user-views');
+    }
 
+    /**
+     * Add routes
+     * 
+     * @return void
+     */
+    private function includeRoutes()
+    {
+        include(__DIR__ . '/routes.php');
+    }
+
+    /**
+     * Add Blade directives
+     * 
+     * @return void
+     */
+    private function addBladeDirectives()
+    {
         // Create Blade code
         Blade::directive('lockUser', function ($time_in_minutes = false) {
             if(!isset($time_in_minutes) || !$time_in_minutes) {
@@ -64,5 +87,25 @@ class UserLockProvider extends ServiceProvider
               }, 1000*60*$time_in_minutes)
             }</script>\"; } ?>";
         });
+    }
+
+    /**
+     * Register controllers
+     * 
+     * @return mixed
+     */
+    private function registerControllers()
+    {
+        return $this->app->make('DrPeter\LockUser\LockUserController');
+    }
+
+    /**
+     * Register views
+     * 
+     * @return void
+     */
+    private function registerViews()
+    {
+        $this->loadViewsFrom(__DIR__ . '/views', 'userlock');
     }
 }
