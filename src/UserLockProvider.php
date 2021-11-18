@@ -38,7 +38,7 @@ class UserLockProvider extends ServiceProvider
     private function publishFiles()
     {
         $this->publishes([
-            __DIR__ . '/views/lockscreen.blade.php' =>  resource_path('views/vendor/dr-peter/lock-user/lockscreen.blade.php'),
+            __DIR__ . '/resources/views/lockscreen.blade.php' =>  resource_path('views/vendor/dr-peter/lock-user/lockscreen.blade.php'),
         ], 'lock-user-views');
     }
 
