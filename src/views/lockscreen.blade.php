@@ -22,13 +22,13 @@
                         <button type="submit" class="btn btn-primary">{{ __('Unlock') }}</button>
                     </div>
                     <div class="col-md-6 text-end">
-                        <a class="btn btn-outline-secondary" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <a class="btn btn-outline-secondary" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form-lock').submit();">
                             {{ __('Logout') }}
                         </a>                                    
                     </div>
                 </div>
             </form>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            <form id="logout-form-lock" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
         </div>
